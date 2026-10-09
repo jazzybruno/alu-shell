@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# This script writes its PID to a file, loops forever and reacts to SIGTERM, SIGINT and SIGQUIT
+pid_file="/var/run/myscript.pid"
+echo "$$" > "$pid_file"
+trap 'echo "I hate the kill command"; rm -f "$pid_file"; exit' SIGTERM
+trap 'echo "Y U no love me?!"' SIGINT
+trap 'rm -f "$pid_file"; exit' SIGQUIT
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
